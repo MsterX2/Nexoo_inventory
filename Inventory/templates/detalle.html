@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h6>{{ producto.nombre }}</h6>
+    <p>valor de compra: {{ producto.valor_compra }}</p>
+    <p>valor de venta: {{ producto.valor_venta }}</p>
+    <p>default stock: {{ producto.default_stock }}</p>
+    <p>agrupador de producto: {{ producto.base }}</p>
+</div>
+{% endblock %}

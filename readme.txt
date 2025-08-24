@@ -24,11 +24,13 @@ dentro del dir de la aplicacion crear archivo urls.py con el siguiente texto:
              name='[nombre para futura referencia]')
     ]
 *Modelos llave foranea on_delete:*
-CASCADE
-PROTECT
-RESTRICT
-SET_NULL
-SET_DEFAULT
+CASCADE -> elimina el objeto
+PROTECT -> impide que se elimine el objeto mientras tenga otros elementos referenciandolo lanzando un error
+RESTRICT -> no deja eliminar mientras tenga asociados
+SET_NULL -> vuelve null el campo
+SET_DEFAULT -> lo convierte en el valor por defecto
+DO_NOTHING -> no hace nada
+SET() -> decide manualmente que sucede
 
 *migraciones, reflejar los modelos en la base de datos*
 en shell
@@ -37,3 +39,27 @@ python manage.py migrate
 
 *Crear administrador*
 python manage.py createsuperuser
+
+*Interactuar con la orm*
+model.objects. -> (all, get, filter)
+argumentos
+nomnre del campo si se le quiere aplicar algun metodo extra usar __ y el nombre
+gt -> mayor que
+lt -> menor  que
+gte -> mayor o igual que
+lte -> menor  o igual que
+
+
+*renderizando plantillas html*
+en view usar:
+returm render (
+    request,
+    plantillas_name,
+    context -> variables en diccionario
+
+)
+
+*Extender de archivos html*
+{% extends "base.html" %}
+{% block content %}
+{% end block content %}

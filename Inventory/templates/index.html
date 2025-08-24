@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Inventarios</h1>
+<table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Stock</th>
+                <th>precio de venta</th>
+                <th>fecha</th>
+            </tr>
+        </thead>
+
+    <tbody>
+        {% for inv in productos %}
+        <tr>
+            <td>{{ inv.nombre_id }}</td>
+            <td>
+                <a href="{% url 'Inventory:detalle' inv.nombre_id %}">
+                    {{ inv.nombre }}
+                </a>
+            </td>
+            <td>{{ inv.stock }}</td>
+            <td>{{ inv.nombre.valor_venta }}</td>
+            <td>{{ inv.inventario.fecha }}</td>
+        </tr>
+        {% endfor %}
+</table>
+{% endblock %}
