@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Inventarios</h1>
+<table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Stock por defecto</th>
+                <th>Familia</th>
+            </tr>
+        </thead>
+
+    <tbody>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.id }}</td>
+            <td>
+                <a> {{ producto.nombre }}</a>
+            </td>
+            <td>{{ producto.default_stock }}</td>
+            <td>{{ producto.base }}</td>
+        </tr>
+        {% endfor %}
+</table>
+{% endblock %}

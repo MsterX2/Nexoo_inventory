@@ -16,7 +16,8 @@ class Fecha(models.Model):
 class Producto(models.Model):
     "tabla de Productos"
     nombre = models.CharField(max_length=50)
-    default_stock = models.DecimalField(decimal_places=0, max_digits=10)
+    default_stock = models.DecimalField(
+        decimal_places=0, max_digits=10, default=0)
     base = models.ForeignKey(
         'self',
         null=True,
@@ -74,25 +75,40 @@ class Factura(models.Model):
         related_name='factura'
     )
 
-    class Tipo(models.TextChoices):
-        COMPRA = 'compra', 'Compra'
-        VENTA = 'venta', 'Venta'
-    type = models.CharField(max_length=10, choices=Tipo.choices)
 
-
-class Facturas(models.Model):
-    """Tabla para registrar las facturas"""
-    factura = models.ForeignKey(
-        Factura,
-        on_delete=models.RESTRICT,
-        related_name='facturas',
-    )
-    producto = models.ForeignKey(
-        Producto,
-        on_delete=models.RESTRICT,
-        related_name='facturas',
-    )
+class FacturasDatafield(models.Model):
     stock = models.DecimalField(
         decimal_places=0, default=0, blank=True, max_digits=10)
     monto = models.DecimalField(
         decimal_places=2, default=0, blank=True, max_digits=10)
+
+    class Meta:
+        abstract = True
+
+
+class FacturasCompra(FacturasDatafield):
+    """Tabla para registrar las facturas"""
+    factura = models.ForeignKey(
+        Factura,
+        on_delete=models.RESTRICT,
+        related_name='compras',
+    )
+    producto = models.ForeignKey(
+        Producto,
+        on_delete=models.RESTRICT,
+        related_name='compras',
+    )
+
+
+class FacturasVenta(FacturasDatafield):
+    """Tabla para registrar las facturas"""
+    factura = models.ForeignKey(
+        Factura,
+        on_delete=models.RESTRICT,
+        related_name='ventas',
+    )
+    producto = models.ForeignKey(
+        Producto,
+        on_delete=models.RESTRICT,
+        related_name='ventas',
+    )

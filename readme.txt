@@ -63,3 +63,46 @@ returm render (
 {% extends "base.html" %}
 {% block content %}
 {% end block content %}
+
+
+***formularios***
+from . import models
+from django.forms import ModelForm
+
+
+class ProductoForm(ModelForm):
+    class Meta:
+        model = modelo del cual se va a crear el formulario
+        fields = listas de campos del modelo
+
+em view
+
+def formulario(request):
+    form = ProductoForm()
+    return render(request, 'producto_form.html', {'form': form})
+
+
+en plantilla html
+
+{% block content %}
+  <h2>Agregar Producto</h2>
+  <form action="{% url "Inventory:formulario" %}" method="post">
+    {% csrf_token %} -> nunca olvidar poner sirve para mejor seguridad
+
+    {{ form }}
+    <button type="submit">Guardar</button>
+  </form>
+{% endblock content %}
+
+
+
+***validando el formulario***
+def formulario(request):
+    if request.method == 'POST':
+        form = ProductoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/Inventory")
+    else:
+        form = ProductoForm()
+    return render(request, 'producto_form.html', {'form': form})

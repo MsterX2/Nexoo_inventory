@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Inventaario anterior</th>
+            <th>Inventario actual</th>
+            <th>Ventas</th>
+            <th>Diferencia</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inv in inventario %}
+        <tr>
+            <td>{{ inv.nombre }}</td>
+            <td>{{ inv.inventario_anterior }}</td>
+            <td>{{ inv.inventario_actual }}</td>
+            <td>{{ inv.ventas }}</td>
+            <td>{{ inv.diferencia }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

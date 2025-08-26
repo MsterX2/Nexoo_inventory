@@ -8,7 +8,6 @@
                 <th>id</th>
                 <th>Nombre</th>
                 <th>Stock</th>
-                <th>precio de venta</th>
                 <th>fecha</th>
             </tr>
         </thead>
@@ -16,14 +15,13 @@
     <tbody>
         {% for inv in productos %}
         <tr>
-            <td>{{ inv.nombre_id }}</td>
+            <td>{{ inv.producto_id }}</td>
             <td>
-                <a href="{% url 'Inventory:detalle' inv.nombre_id %}">
-                    {{ inv.nombre }}
+                <a href="{% url 'Inventory:detalle' inv.producto_id %}">
+                    {{ inv.producto }}
                 </a>
             </td>
             <td>{{ inv.stock }}</td>
-            <td>{{ inv.nombre.valor_venta }}</td>
             <td>{{ inv.inventario.fecha }}</td>
         </tr>
         {% endfor %}

@@ -17,12 +17,12 @@ def actualizar_inventario_anterior_y_siguiente(sender, instance, created, **kwar
             if anterior:
                 instance.anterior = anterior
                 anterior.siguiente = instance
-                anterior.save(**kwargs)
+                anterior.save()
             if siguiente:
                 instance.siguiente = siguiente
                 siguiente.anterior = instance
-                siguiente.save(**kwargs)
-            instance.save(**kwargs)
+                siguiente.save()
+            instance.save()
 
 
 @receiver(pre_delete, sender=Inventory)
@@ -30,11 +30,11 @@ def actualizar_inventario_anterior_y_siguiente(sender, instance, **kwargs):
     with transaction.atomic():
         if instance.anterior:
             instance.anterior.siguiente = instance.siguiente
-            instance.anterior.save(**kwargs)
+            instance.anterior.save()
             instance.anterior = None
         if instance.siguiente:
             instance.siguiente.anterior = instance.anterior
-            instance.siguiente.save(**kwargs)
+            instance.siguiente.save()
             instance.siguiente = None
 
 
