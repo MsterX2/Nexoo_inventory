@@ -6,8 +6,11 @@
         <tr>
             <th>Producto</th>
             <th>Inventaario anterior</th>
-            <th>Inventario actual</th>
-            <th>Ventas</th>
+            <th>Compras</th>
+            <th>Inventario anterior + compras</th>
+            <th>inventario actual</th>
+            <th>ventas</th>
+            <th>inventario actual + ventas</th>
             <th>Diferencia</th>
         </tr>
     </thead>
@@ -16,8 +19,11 @@
         <tr>
             <td>{{ inv.nombre }}</td>
             <td>{{ inv.inventario_anterior }}</td>
+            <td>{{ inv.comprass }}</td>
+            <td>{{ inv.inventario_anterior_compras }}</td>
             <td>{{ inv.inventario_actual }}</td>
-            <td>{{ inv.ventas }}</td>
+            <td>{{ inv.ventass }}</td>
+            <td>{{ inv.inventario_actual_ventas }}</td>
             <td>{{ inv.diferencia }}</td>
         </tr>
         {% endfor %}

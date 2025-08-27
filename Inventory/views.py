@@ -48,7 +48,7 @@ def formulario_producto(request):
         form = ProductoForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/Inventory/productos")
+            return HttpResponseRedirect("")
     else:
         form = ProductoForm()
     return render(request, 'form/producto_form.html', {'form': form})
@@ -60,7 +60,7 @@ def formulario_inventario(request):
         form = InventoryForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/Inventory/inventarios")
+            return HttpResponseRedirect("")
     else:
         form = InventoryForm()
     return render(request, 'form/inventory_form.html', {'form': form})
@@ -72,7 +72,7 @@ def formulario_fecha(request):
         form = FechaForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/Inventory/inventarios")
+            return HttpResponseRedirect("")
     else:
         form = FechaForm()
     return render(request, 'form/fecha_form.html', {'form': form})
@@ -86,5 +86,61 @@ def obtener_diferencia_inventario(request, inventario_id):
     return render(
         request,
         'diferencia.html',
-        context={'productos': inventario}
+        context={'inventario': inventario}
     )
+
+
+def formulario_factura(request):
+    from .forms import FacturaForm
+    if request.method == 'POST':
+        form = FacturaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("")
+    else:
+        form = FacturaForm()
+    return render(request, 'form/factura_form.html', {'form': form})
+
+
+def formulario_factura_compra(request):
+    from .forms import FacturasCompraForm
+    if request.method == 'POST':
+        form = FacturasCompraForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("")
+    else:
+        form = FacturasCompraForm()
+    return render(request, 'form/factura_compra_form.html', {'form': form})
+
+
+def formulario_factura_venta(request):
+    from .forms import FacturasVentaForm
+    if request.method == 'POST':
+        form = FacturasVentaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("")
+    else:
+        form = FacturasVentaForm()
+    return render(request, 'form/factura_venta_form.html', {'form': form})
+
+
+def formulario_inventario_producto(request):
+    from .forms import InventoryProductoForm
+    if request.method == 'POST':
+        form = InventoryProductoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("inventario_producto")
+    else:
+        form = InventoryProductoForm()
+    inventario_default = Inventory.objects.order_by(
+        'fecha').last()
+    inventario_default = inventario_default.anterior
+    form.fields["inventario"].initial = inventario_default.id
+    return render(request, 'form/inventario_producto.html', {'form': form})
+
+
+def formularios(request):
+    return render(request, 'formularios.html')

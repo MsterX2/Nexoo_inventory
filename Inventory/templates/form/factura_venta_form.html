@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{{% block content %}
+<h2>Agregar factura de venta</h2>
+<form action="{%url 'Inventory:factura_venta_form'%}", method='post', novalidate>
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Guardar</button>
+</form>
+{% endblock %}}

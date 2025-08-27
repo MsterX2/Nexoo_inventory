@@ -2,7 +2,7 @@
 
 {% block content %}
   <h2>Agregar Producto</h2>
-  <form action="{% url "Inventory:formulario" %}" method="post">
+  <form action="{% url 'Inventory:formulario' %}" method="post">
     {% csrf_token %}
     {{ form }}
     <button type="submit">Enviar</button>

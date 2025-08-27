@@ -106,3 +106,64 @@ def formulario(request):
     else:
         form = ProductoForm()
     return render(request, 'producto_form.html', {'form': form})
+
+
+***personalizar formularios
+    from django.forms.renderers import TemplatesSetting
+
+
+class CustomFormRenderer(TemplatesSetting):
+    form_template_name = 'form_snippet.html'
+
+
+FORM_RENDERER = "nombre del proyecto.settings.CustomFormRenderer"
+
+
+***personalizando campos en formularios***
+crear templates/django/forms/widgets/input.html
+y agregar el texto 
+
+<input 
+    class="form-control"
+    type="{{ widget.type }}" 
+    name="{{ widget.name }}"
+    {% if widget.value != None %} value="
+    {{ widget.value|stringformat:'s' }}"
+     {% endif %}
+     {% include "django/forms/widgets/attrs.html" %}>
+
+"""
+Archivo form_snippet
+{% load add_attr %}
+
+{% for field in form %}
+    <div class="mb-3">
+        {{field.label_tag}} 
+        {% if field.errors %}
+            {{ field|add_attr:"class:is-invalid" }}
+        {% else %}
+            {{ field }}
+        {% endif %}
+        <div  class="invalid-feedback">
+        {% for error in field.errors %}
+            {{error}}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+"""
+***definir atributo***
+from django import template
+register = template.Library()
+
+
+@register.filter(name="add_attr")
+def add_attr(field, css):
+    attrs = {}
+    clase, valor = css.split(':')
+    attrs[clase] = valor
+    return field.as_widget(attrs=attrs)
+
+"""
+
+***Pagina de inicio***

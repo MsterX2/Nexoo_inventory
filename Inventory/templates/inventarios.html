@@ -7,6 +7,8 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Inventario</th>
+                <th scope="col">siguiente</th>
+                <th scope="col">anterior</th>
 
             </tr>
         </thead>
@@ -19,6 +21,8 @@
                             <h5>{{ inventario }}</h5>
                         </a>
                     </td>
+                    <td> {{inventario.siguiente}}</td>
+                    <td> {{inventario.anterior}}</td>
                 </tr>
             {% endfor %}
         </tbody>

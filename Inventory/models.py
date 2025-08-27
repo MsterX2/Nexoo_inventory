@@ -97,6 +97,7 @@ class FacturasCompra(FacturasDatafield):
         Producto,
         on_delete=models.RESTRICT,
         related_name='compras',
+        related_query_name='compras'
     )
 
 
@@ -111,4 +112,5 @@ class FacturasVenta(FacturasDatafield):
         Producto,
         on_delete=models.RESTRICT,
         related_name='ventas',
+        related_query_name='ventas'
     )

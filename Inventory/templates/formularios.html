@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+ {% block content %}
+    <h2> Formularios</h2>
+    <ul>
+        <li><a href="{% url "Inventory:formularios" %}">productos</a></li>
+        <li><a href="{% url "Inventory:inventory_form" %}">inventarios</a></li>
+        <li><a href="{% url "Inventory:fecha_form" %}">fecha</a></li>
+        <li><a href="{% url "Inventory:factura_form" %}">factura</a></li>
+        <li><a href="{% url "Inventory:factura_compra_form" %}">facturas de compra</a></li>
+        <li><a href="{% url "Inventory:factura_venta_form" %}">facturas de venta</a></li>
+        <li><a href="{% url "Inventory:inventario_producto" %}">Inventario Producto</a></li>
+    </ul>    
+ {% endblock content %}
