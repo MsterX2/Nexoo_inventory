@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table>
-    <thead>
+<table class="table table-dark table-striped">
         <tr>
-            <th>Producto</th>
-            <th>Inventaario anterior</th>
-            <th>Compras</th>
-            <th>Inventario anterior + compras</th>
-            <th>inventario actual</th>
-            <th>ventas</th>
-            <th>inventario actual + ventas</th>
-            <th>Diferencia</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Inventaario anterior</th>
+            <th scope="col">Compras</th>
+            <th scope="col">Inventario anterior + compras</th>
+            <th scope="col">inventario actual</th>
+            <th scope="col">ventas</th>
+            <th scope="col">inventario actual + ventas</th>
+            <th scope="col">Diferencia</th>
         </tr>
+
     </thead>
     <tbody>
         {% for inv in inventario %}
         <tr>
-            <td>{{ inv.nombre }}</td>
+            <td scope="row">{{ inv.nombre }}</td>
             <td>{{ inv.inventario_anterior }}</td>
             <td>{{ inv.comprass }}</td>
             <td>{{ inv.inventario_anterior_compras }}</td>

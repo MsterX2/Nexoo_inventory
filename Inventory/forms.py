@@ -1,5 +1,5 @@
 from . import models
-from django.forms import ModelForm
+from django.forms import ModelForm, modelform_factory
 from django import forms
 
 

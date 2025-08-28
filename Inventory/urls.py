@@ -19,4 +19,5 @@ urlpatterns = [
          name='factura_venta_form'),
     path('form/inventario_producto',
          views.formulario_inventario_producto, name='inventario_producto'),
+    path('listar', views.listar, name='listar')
 ]

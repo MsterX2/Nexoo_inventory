@@ -80,9 +80,12 @@ def formulario_fecha(request):
 
 def obtener_diferencia_inventario(request, inventario_id):
     from .workspace.pruebas import obtener_diferencia_inventario
+    from django.db.models import Q
     inventario = get_object_or_404(
         Inventory, id=inventario_id)
     inventario = obtener_diferencia_inventario(inventario.fecha.fecha)
+    inventario = inventario.filter(~Q(inventario_anterior_compras=0) &
+                                   ~Q(inventario_actual_ventas=0))
     return render(
         request,
         'diferencia.html',
@@ -144,3 +147,20 @@ def formulario_inventario_producto(request):
 
 def formularios(request):
     return render(request, 'formularios.html')
+
+
+def listar(request, model):
+    fk_fields = [
+        field.name for field in Inventory._meta.fields if field.is_relation]
+    inventarios = Inventory.objects.all().select_related(
+        *fk_fields).order_by('fecha__fecha')
+
+    inventarios_dicts = [{field.name: getattr(inventario, field.name) for field in Inventory._meta.fields}
+                         for inventario in inventarios]
+    return render(
+        request,
+        "listar.html",
+        {
+            'inventarios_dicts': inventarios_dicts
+        }
+    )
