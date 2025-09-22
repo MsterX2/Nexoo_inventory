@@ -1,5 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    
+<h1>{{Tittle|default:'Formularios'}}</h1>
+<div class="list-group">
+    {% for model in modelos %}
+    <a href="{% url url_actual|default:'Inventory:formularios' model %}"
+        class="list-group-item list-group-item-action">{{model}}</a>
+    {% endfor %}
+</div>
 {% endblock content %}
+
+<!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        The current link item
+    </a>
+    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+    <a href="#" class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a> -->

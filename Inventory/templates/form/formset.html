@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+
+
+
+
+{% block content %}
+  {% load add_attr %}
+  <h2>Agregar {{model}}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{formset.management_form}}
+    <table class="table table-dark table-striped-columns">
+      <caption>Model</caption>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          {% for fecha in fechas %}
+            <th>{{fecha}}</th>
+            <th>Delete</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, fechas in table.items %}
+        <tr>
+          <td scope='row'>{{key}}</td>
+          {% for form in fechas.values %}
+          <td scope='row'>{{form.stock|add_attr:"class:form-control-plaintext"}}</td>
+          <td scope="row">
+            <div class="form-check">
+              {{ form.DELETE|add_attr:"class:form-check-input" }}
+            </div>
+          </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit" name='submit'>Enviar</button>
+  </form>
+
+
+
+{% endblock content %} 

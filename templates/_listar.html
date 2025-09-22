@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{name}}</h1>
+    <table class="table table-dark table-striped-columns">
+            <thead>
+                <tr>
+                    {% for field in fields %}
+                        <th scope="col">{{field.name|capfirst}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+        <tbody>
+            {% for modelo in modelo_dicts %}
+            <tr>
+            {% for valor in modelo.values %}
+                <td scope='row'>{{ valor }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

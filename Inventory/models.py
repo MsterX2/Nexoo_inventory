@@ -7,6 +7,7 @@ class Fecha(models.Model):
     """Tabla de fecha para registrar las fechas y hacer la logica de grapho para automatizar el orden de las fechas y acceder de forma mas eficiente a la fecha anterior"""
     fecha = models.DateField(
         unique=True,
+        db_index=True
     )
 
     def __str__(self):
@@ -58,8 +59,11 @@ class InventoryProducto(models.Model):
     stock = models.DecimalField(
         decimal_places=2, default=0, blank=True, max_digits=10)
 
+    class Meta:
+        unique_together = ('producto', 'inventario')
+
     def __str__(self):
-        return f"{self.nombre.nombre} - {self.inventario.fecha.fecha} - {self.stock}"
+        return f"{self.producto.nombre} - {self.inventario.fecha.fecha} - {self.stock}"
 
 
 class Factura(models.Model):
